@@ -1,21 +1,14 @@
-from nltk.stem.lancaster import LancasterStemmer
-import pandas as pd
-import json
-import pickle
-import nltk
-import numpy
-import tflearn
-from tensorflow.python.framework import ops
-import tensorflow as tf
 import random
-from flask import Flask, jsonify, request
-import time
-
-app = Flask(__name__)
-
-#   Just some space
-
+import tensorflow as tf
+from tensorflow.python.framework import ops
+import tflearn
+import numpy
+import nltk
+import pickle
+import json
+import pandas as pd
 # import sys
+from nltk.stem.lancaster import LancasterStemmer
 stemmer = LancasterStemmer()
 
 
@@ -104,60 +97,27 @@ def bag_of_words(s, words):
     return numpy.array(bag)
 
 
-# def chat():
-#     print("start talking with the bot (Type 'quit' to stop!")
-#     while True:
-#         inp = input("You: ")
-#         if inp.lower() == "quit":
-#             break
-#         results = model.predict([bag_of_words(inp, words)])[0]
-#         results_index = numpy.argmax(results)
-#         tag = labels[results_index]
-#         bot_response = random.choice(responses)
+def chat():
+    print("start talking with the bot (Type 'quit' to stop!")
+    while True:
+        inp = input("You: ")
+        if inp.lower() == "quit":
+            break
+        results = model.predict([bag_of_words(inp, words)])[0]
+        results_index = numpy.argmax(results)
+        tag = labels[results_index]
 
-#         if results[results_index] > 0.7:
-#             for tg in data['intents']:
-#                 if tg['tag'] == tag:
-#                     responses = tg['responses']
-#                 elif tag == 'goodbye':
-#                     # print('Bot: ', random.choice(responses))
-#                     quit()
-#             # print('Bot: ', random.choice(responses))
-#         else:
-#             # print('Bot: I didn\'t get that, please try once more')
-
-
-# chat()
+        if results[results_index] > 0.7:
+            for tg in data['intents']:
+                if tg['tag'] == tag:
+                    responses = tg['responses']
+                elif tag == 'goodbye':
+                    # print('Bot: ', random.choice(responses))
+                    quit()
+            print('Bot: ', random.choice(responses))
+        else:
+            print('Bot: I didn\'t get that, please try once more')
 
 
-# Just another space
+chat()
 
-@app.route("/bot", methods=["POST"])
-def response():
-    query = dict(request.form)['query']
-    results = model.predict([bag_of_words(query, words)])[0]
-    results_index = numpy.argmax(results)
-    tag = labels[results_index]
-    bot_response = random.choice(responses)
-
-    if results[results_index] > 0.7:
-        for tg in data['intents']:
-            if tg['tag'] == tag:
-                responses = tg['responses']
-            elif tag == 'goodbye':
-                result = random.choice(responses)
-                # print('Bot: ', random.choice(responses))
-                quit()
-        result = random.choice(responses)
-        # print('Bot: ', random.choice(responses))
-    else:
-        result = 'I didn\'t get that, please try once more'
-        # print('Bot: I didn\'t get that, please try once more')
-
-    # query = dict(request.form)['query']
-    # result = query + " " + time.ctime()
-    return jsonify({"response": result})
-
-
-if __name__ == "__main__":
-    app.run(host="0.0.0.0",)
