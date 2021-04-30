@@ -5,8 +5,8 @@ import pickle
 import nltk
 import numpy
 import tflearn
-from tensorflow.python.framework import ops
-import tensorflow as tf
+# from tensorflow.python.framework import ops
+# import tensorflow as tf
 import random
 from flask import Flask, jsonify, request
 import time
@@ -74,7 +74,7 @@ except:
     with open("data.pickle", "wb") as f:
         pickle.dump((words, labels, training, output), f)
 
-ops.reset_default_graph()
+# ops.reset_default_graph()
 
 net = tflearn.input_data(shape=[None, len(training[0])])
 net = tflearn.fully_connected(net, 8)
