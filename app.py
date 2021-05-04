@@ -8,12 +8,18 @@ import tflearn
 # from tensorflow.python.framework import ops
 # import tensorflow as tf
 import random
-from flask import Flask, jsonify, request
+from flask import Flask, jsonify, request, render_template_string
 import time
 
 app = Flask(__name__)
 
+
+@app.route('/')
+def index():
+    return render_template_string("Yes")
+
 #   Just some space
+
 
 # import sys
 stemmer = LancasterStemmer()
@@ -132,7 +138,7 @@ def bag_of_words(s, words):
 
 # Just another space
 
-@app.route("/bot", methods=["POST"])
+@app.route("/bot")
 def response():
     query = dict(request.form)['query']
     results = model.predict([bag_of_words(query, words)])[0]
@@ -157,7 +163,10 @@ def response():
     # query = dict(request.form)['query']
     # result = query + " " + time.ctime()
     return jsonify({"response": result})
+    # print(result + "*************")
+    # return render_template_string('Hello')
 
 
 if __name__ == "__main__":
+    # app.run(debug=True)
     app.run(host="0.0.0.0",)
