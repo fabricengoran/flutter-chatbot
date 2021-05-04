@@ -138,7 +138,7 @@ def bag_of_words(s, words):
 
 # Just another space
 
-@app.route("/bot")
+@app.route("/bot", methods=["POST"])
 def response():
     query = dict(request.form)['query']
     results = model.predict([bag_of_words(query, words)])[0]
