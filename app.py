@@ -5,13 +5,12 @@ import pickle
 import nltk
 import numpy
 import tflearn
-# from tensorflow.python.framework import ops
-# import tensorflow as tf
 import random
 from flask import Flask, jsonify, request, render_template_string
 import time
 
 app = Flask(__name__)
+app.secret_key = 'super_secret_key'
 
 
 @app.route('/')
@@ -162,11 +161,12 @@ def response():
 
     # query = dict(request.form)['query']
     # result = query + " " + time.ctime()
+    print(query + "*************")
+    print(result + "*************")
     return jsonify({"response": result})
-    # print(result + "*************")
     # return render_template_string('Hello')
 
 
 if __name__ == "__main__":
-    # app.run(debug=True)
-    app.run(host="0.0.0.0")
+    app.run(debug=True)
+    # app.run(host="0.0.0.0")
