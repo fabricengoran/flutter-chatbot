@@ -65,21 +65,18 @@ def response():
                 responses = tg['responses']
             elif tag == 'goodbye':
                 result = random.choice(responses)
-                # print('Bot: ', random.choice(responses))
         result = random.choice(responses)
-        # print('Bot: ', random.choice(responses))
     else:
         result = 'I didn\'t get that, please try once more'
-        # print('Bot: I didn\'t get that, please try once more')
 
     # query = dict(request.form)['query']
     # result = query + " " + time.ctime()
-    print(query + "*************")
-    print(result + "*************")
+    # print(query + "*************")
+    # print(result + "*************")
     return jsonify({"response": result})
     # return render_template_string('Hello')
 
 
 if __name__ == "__main__":
-    app.run(debug=True)
-    # app.run(host="0.0.0.0")
+    # app.run(debug=True)
+    app.run(host="0.0.0.0",)
