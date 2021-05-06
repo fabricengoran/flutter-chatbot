@@ -29,7 +29,7 @@ with open("intents.json") as file:
     # data = pd.read_json(file)
 
 try:
-    with open("datad.pickle", "rb") as f:
+    with open("data.pickle", "rb") as f:
         words, labels, training, output = pickle.load(f)
 except:
     words = []
