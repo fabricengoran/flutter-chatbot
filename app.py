@@ -54,11 +54,10 @@ def index():
 
 @app.route("/bot", methods=["POST", "GET"])
 def response():
-    query = "Read me some news"
-    # if (dict(request.form)['query']):
-    #     query = dict(request.form)['query']
-    # else:
-    #     query = "Read me some news"
+    if (dict(request.form)['query']):
+        query = dict(request.form)['query']
+    else:
+        query = "Read me some news"
     results = model.predict([bag_of_words(query, words)])[0]
     results_index = numpy.argmax(results)
     tag = labels[results_index]
