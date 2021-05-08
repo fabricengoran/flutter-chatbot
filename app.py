@@ -12,6 +12,8 @@ import time
 app = Flask(__name__)
 app.secret_key = 'super_secret_key'
 
+nltk.download('punkt')
+
 #   Just some space
 
 stemmer = LancasterStemmer()
@@ -52,7 +54,7 @@ def index():
     return render_template_string("Hello")
 
 
-@app.route("/bot", methods=["POST", "GET"])
+@app.route("/bot", methods=["POST"])
 def response():
     if (dict(request.form)['query']):
         query = dict(request.form)['query']
