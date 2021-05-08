@@ -1,4 +1,6 @@
 {
     "editor.fontFamily": "Consolas, 'Courier New', monospace",
-    "workbench.colorTheme": "Atom One Dark"
+    "workbench.colorTheme": "Atom One Dark",
+    "python.pythonPath": "C:\\Users\\User\\AppData\\Local\\Programs\\Python\\Python39\\python.exe",
+    "python.formatting.provider": "autopep8"
 }

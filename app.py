@@ -52,9 +52,13 @@ def index():
     return render_template_string("Hello")
 
 
-@app.route("/bot", methods=["POST"])
+@app.route("/bot", methods=["POST", "GET"])
 def response():
-    query = dict(request.form)['query']
+    query = "Read me some news"
+    # if (dict(request.form)['query']):
+    #     query = dict(request.form)['query']
+    # else:
+    #     query = "Read me some news"
     results = model.predict([bag_of_words(query, words)])[0]
     results_index = numpy.argmax(results)
     tag = labels[results_index]
@@ -78,5 +82,5 @@ def response():
 
 
 if __name__ == "__main__":
-    # app.run(debug=True)
-    app.run(host="0.0.0.0",)
+    app.run(debug=True)
+    # app.run(host="0.0.0.0",)
