@@ -68,9 +68,7 @@ def response():
         for tg in data['intents']:
             if tg['tag'] == tag:
                 responses = tg['responses']
-            elif tag == 'goodbye':
                 result = random.choice(responses)
-        result = random.choice(responses)
     else:
         result = 'I didn\'t get that, please try once more'
 
